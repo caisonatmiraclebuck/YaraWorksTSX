@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+// Defining the style components which can be used further
 const Theme = {
     colors: {
       bg: `#fff`,

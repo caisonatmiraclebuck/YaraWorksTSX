@@ -7,10 +7,12 @@ import Header from '../components/header';
 import Layout from '../components/layout';
 
 const Home: NextPage = () => {
+    //Defining the states for users and loader
   const [users, setUsers] = useState<any[]>([]);
   const [isLoaded, setLoaded] = useState(false);
 
   useEffect(() => {
+      //Calling the users api for data
       const fetchUsers = async () => {
           const response = await fetch(`/api/users`, {
             method: "GET",
@@ -19,13 +21,14 @@ const Home: NextPage = () => {
             },
           });
           const users = await response.json();
+          //Updating the states
           setUsers(users.data);
           setLoaded(true);
       }
       fetchUsers();
   },[]);
 
-  
+  //Showing Loader if api isn't fetched yet
   if(!isLoaded){
       return (
           <Container>

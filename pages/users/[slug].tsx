@@ -6,10 +6,11 @@ import { useRouter } from 'next/router';
 import Layout from '../../components/layout';
 
 const User: NextPage = () => {
-
+    //Using Router to get the query of the url
     const router = useRouter()
     const {slug} = router.query
     
+    //Defining the states
     const [user, setUser] = useState<any>([]);
     const [isLoaded, setLoaded] = useState(false);
 
@@ -17,10 +18,12 @@ const User: NextPage = () => {
         if(!slug){
             return;
         }
+        //Extracting userid from the slug
         const slugArr = (slug as string).split("-");
         const uid = slugArr[2];
 
         const fetchUser = async () => {
+            //Calling the single user API
             const response = await fetch(`/api/users/${uid}`, {
                 method: "GET",
                 headers: {
@@ -28,13 +31,14 @@ const User: NextPage = () => {
                 },
             });
             const user = await response.json();
+            //Updating the states
             setUser(user.data);
             setLoaded(true);
         }
         fetchUser();
     },[]);
 
-  
+  //Using loader if api isn't fetched yet
   if(!isLoaded){
       return (
           <Container>
