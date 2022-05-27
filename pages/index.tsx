@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Grid,Item,Container,Card,CardImage,CardText,Button } from '../components/styled';
 import { Loader } from '../components/loader';
-import Header from '../components/header';
 import Layout from '../components/layout';
 
 const Home: NextPage = () => {
@@ -12,7 +11,7 @@ const Home: NextPage = () => {
   const [isLoaded, setLoaded] = useState(false);
 
   useEffect(() => {
-      //Calling the users api for data
+      //Calling the users api for data from our domain
       const fetchUsers = async () => {
           const response = await fetch(`/api/users`, {
             method: "GET",
@@ -22,9 +21,10 @@ const Home: NextPage = () => {
           });
           const users = await response.json();
           //Updating the states
-          setUsers(users.data);
-          setLoaded(true);
+          setUsers(users.data);// Adding data to users state
+          setLoaded(true);// Updating isLoaded state to true
       }
+      //Calling the fetchUsers() function
       fetchUsers();
   },[]);
 

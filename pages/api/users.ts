@@ -5,8 +5,8 @@ type Data = {
 }
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
+  req: NextApiRequest, //Request coming to the function
+  res: NextApiResponse<Data> //Response returned from the function with type Data
 ) {
     //Returning back with 405 if request method is not correct
     if (req.method !== 'GET') {
@@ -21,7 +21,7 @@ export default async function handler(
     if(!users.ok){
         res.status(500).json({ data: [{ message: `Unable to fetch API`,}]})
     }
-
+    //Storing data from users api to data const
     const { data } = await users.json()
     //Returning the response
     res.status(200).json({ data: data })

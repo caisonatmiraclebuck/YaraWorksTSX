@@ -15,6 +15,7 @@ const User: NextPage = () => {
     const [isLoaded, setLoaded] = useState(false);
 
     useEffect(() => {
+        // Used this, because slug was returning undefined on first render
         if(!slug){
             return;
         }
@@ -23,7 +24,7 @@ const User: NextPage = () => {
         const uid = slugArr[2];
 
         const fetchUser = async () => {
-            //Calling the single user API
+            //Calling the single user API from our domain
             const response = await fetch(`/api/users/${uid}`, {
                 method: "GET",
                 headers: {
@@ -32,9 +33,10 @@ const User: NextPage = () => {
             });
             const user = await response.json();
             //Updating the states
-            setUser(user.data);
-            setLoaded(true);
+            setUser(user.data);//adding data to user state
+            setLoaded(true);// updating isLoaded state to true
         }
+        //Calling the fetUser() function
         fetchUser();
     },[]);
 

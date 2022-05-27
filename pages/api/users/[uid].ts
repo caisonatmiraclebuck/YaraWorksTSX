@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-
+// Defining the values that <Data> can accept
 type Data = {
   data: {},
 }
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
+  req: NextApiRequest, //Request coming to the function
+  res: NextApiResponse<Data> //Response returned from the function with type Data
 ) {
     //Getting the uid passed in API Endpoint
     const { uid } = req.query
@@ -25,6 +25,7 @@ export default async function handler(
         res.status(500).json({ data: [{ message: `Unable to fetch API`,}]})
     }
 
+    //Storing data from users api to data const
     const { data } = await users.json()
     //Returning the response
     res.status(200).json({ data: data })
